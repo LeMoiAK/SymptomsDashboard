@@ -1,0 +1,45 @@
+version: "3.14"
+
+services:
+  db:
+    build: ./db
+    container_name: postgres-dev
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: app_db
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    networks:
+      - app-net
+
+    ports:
+      - "127.0.0.1:5432:5432"  # local access only
+
+  backend:
+    build: ./backend
+    container_name: backend
+
+    depends_on:
+      - db
+
+    environment:
+      DATABASE_URL: postgresql://app_user:${APP_DB_PASSWORD}@db:5432/app_db
+
+    networks:
+      - app-net
+
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
+
+networks:
+  app-net:
+    driver: bridge
