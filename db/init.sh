@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ -z "$APP_DB_PASSWORD" ]; then
+  echo "ERROR: APP_DB_PASSWORD is not set"
+  exit 1
+fi
+
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
     CREATE USER app_user WITH PASSWORD '${APP_DB_PASSWORD}';
 
