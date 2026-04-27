@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 # Install uv
 RUN pip install uv
@@ -9,7 +9,7 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies
-RUN uv pip install --system -r pyproject.toml
+RUN uv sync --system
 
 # Copy app code
 COPY app ./app
