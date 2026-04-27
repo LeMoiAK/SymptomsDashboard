@@ -14,6 +14,7 @@ EOSQL
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname app_db <<-EOSQL
     GRANT USAGE ON SCHEMA public TO app_user;
+    GRANT CREATE ON SCHEMA public TO app_user;
 
     GRANT SELECT, INSERT, UPDATE, DELETE
     ON ALL TABLES IN SCHEMA public

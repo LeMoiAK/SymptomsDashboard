@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker, DeclarativeBase
 import os
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+print(f"DB URL: {DATABASE_URL}")
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 
