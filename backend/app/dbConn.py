@@ -14,8 +14,8 @@ engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 
-# The BaseModel is the base model to declare all tables
-class BaseModel(DeclarativeBase):
+# The BaseDeclarativeClass is the base model to declare all tables
+class BaseDeclarativeClass(DeclarativeBase):
     pass
 
 

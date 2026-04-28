@@ -3,10 +3,10 @@ The models module contains all the database tables models.
 """
 
 import sqlalchemy as db
-from .dbconn import BaseModel
+from .dbconn import BaseDeclarativeClass
 
 
-class Patients(BaseModel):
+class Patients(BaseDeclarativeClass):
     """The patients table"""
     __tablename__ = "patients"
 
@@ -15,16 +15,16 @@ class Patients(BaseModel):
     date_of_birth = db.Column(db.Date, nullable=False)
     NHS_number = db.Column(db.String(10), nullable=False)
 
-class Doctors(BaseModel):
+class Doctors(BaseDeclarativeClass):
     """The doctors table"""
     __tablename__ = "doctors"
 
     doctor_id = db.Column(db.Integer, primary_key=True, index=True)
     doctor_name = db.Column(db.String(100), nullable=False)
 
-class DailyLog(BaseModel):
+class DailyLog(BaseDeclarativeClass):
     """Daily logs recorded by patients"""
-    __tablename__ = "daily_log"
+    __tablename__ = "daily_logs"
 
     log_id = db.Column(db.Integer, primary_key=True, index=True)
     patient_id = db.Column(db.Integer, nullable=False)
@@ -35,7 +35,7 @@ class DailyLog(BaseModel):
     symptom_Diarrhea = db.Column(db.Integer, nullable=False)
     symptom_Nausea = db.Column(db.Integer, nullable=False)
 
-class Appointments(BaseModel):
+class Appointments(BaseDeclarativeClass):
     """Appointments between doctor and patient"""
     __tablename__ = "appointments"
 
@@ -44,7 +44,7 @@ class Appointments(BaseModel):
     patient_id = db.Column(db.Integer, nullable=False)
     doctor_id = db.Column(db.Integer, nullable=False)
 
-class Treatment(BaseModel):
+class Treatment(BaseDeclarativeClass):
     """The treatments given to a patient"""
     __tablename__ = "treatments"
 
