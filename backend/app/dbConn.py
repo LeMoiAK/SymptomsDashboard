@@ -1,3 +1,7 @@
+"""
+The db module contains the setup of the database connection.
+"""
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 import os
@@ -10,11 +14,13 @@ engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 
-class Base(DeclarativeBase):
+# The BaseModel is the base model to declare all tables
+class BaseModel(DeclarativeBase):
     pass
 
 
 def get_db():
+    """Creates a connection to the database."""
     db = SessionLocal()
     try:
         yield db

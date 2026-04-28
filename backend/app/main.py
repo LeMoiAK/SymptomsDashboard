@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .db import Base, engine
+from .dbConn import Base, engine
 from .routes import logs, analytics
 
 app = FastAPI(title="Daily Logs API")
