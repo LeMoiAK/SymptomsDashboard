@@ -16,7 +16,7 @@ def get_logs_for_week(db: Session, start_date: date):
 
     return (
         db.query(models.DailyLog)
-        .filter(models.DailyLog.date >= start_date)
-        .filter(models.DailyLog.date <= end_date)
+        .filter(models.DailyLog.log_date >= start_date)
+        .filter(models.DailyLog.log_date <= end_date)
         .all()
     )

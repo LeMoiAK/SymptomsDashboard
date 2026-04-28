@@ -10,4 +10,5 @@ dependencies = [
     "pydantic-settings",
     "python-dotenv",
     "psycopg[binary]>=3.3.3",
+    "alembic>=1.18.4",
 ]
