@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from datetime import date, timedelta
-from ..db import get_db
+from ..dbconn import get_db
 from ..crud import get_logs_for_week
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
