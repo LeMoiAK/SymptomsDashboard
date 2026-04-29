@@ -32,6 +32,12 @@ class DailyLogOut(BaseModel):
         from_attributes = True
 
 # ----- Models for the Patients
+class PatientCreate(BaseModel):
+    """A patient info before going into the database"""
+    patient_name: str
+    date_of_birth: date
+    NHS_number: str
+
 class PatientOut(BaseModel):
     """A patient info from the database"""
     patient_id: int
@@ -43,6 +49,9 @@ class PatientOut(BaseModel):
         from_attributes = True
 
 # ----- Models for the Doctors
+class DoctorCreate(BaseModel):
+    """A doctor info before going into the database"""
+    doctor_name: str
 class DoctorOut(BaseModel):
     """A doctor info from the database"""
     doctor_id: int

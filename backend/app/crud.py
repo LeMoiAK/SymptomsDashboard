@@ -64,6 +64,14 @@ def get_logs_between_dates_for_patient(dbSession: Session, patient_id: int, star
     )
 
 # ------------------- FUNCTIONS FOR THE PATIENTS AND DOCTORS -------------------
+def create_patient(dbSession: Session, patient: schemas.PatientCreate) -> schemas.PatientOut:
+    """Inserts a new patient into the database"""
+    db_patient = models.Patients(**patient.model_dump())
+    dbSession.add(db_patient)
+    dbSession.commit()
+    dbSession.refresh(db_patient)
+    return db_patient
+
 def get_patient_info(dbSession: Session, patient_id: int) -> schemas.PatientOut:
     """Gets the info for a patient"""
     # Fetch existing record
@@ -72,6 +80,14 @@ def get_patient_info(dbSession: Session, patient_id: int) -> schemas.PatientOut:
 def get_all_patients(dbSession: Session) -> List[schemas.PatientOut]:
     """Returns the list of all the patients"""
     return dbSession.query(models.Patients).all()
+
+def create_doctor(dbSession: Session, doctor: schemas.DoctorCreate) -> schemas.DoctorOut:
+    """Inserts a new doctor into the database"""
+    db_doctor = models.Doctors(**doctor.model_dump())
+    dbSession.add(db_doctor)
+    dbSession.commit()
+    dbSession.refresh(db_doctor)
+    return db_doctor
 
 def get_doctor_info(dbSession: Session, doctor_id: int) -> schemas.DoctorOut:
     """Gets the info for a doctor"""
