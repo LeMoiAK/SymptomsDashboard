@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from datetime import date
 from typing import Optional
 
-
+# ----- Models for the logs
 class DailyLogCreate(BaseModel):
     """A log before going into the database, so no log_id"""
     patient_id: int
@@ -27,6 +27,26 @@ class DailyLogOut(BaseModel):
     symptom_Fatigue: int
     symptom_Diarrhea: int
     symptom_Nausea: int
+
+    class Config:
+        from_attributes = True
+
+# ----- Models for the Patients
+class PatientOut(BaseModel):
+    """A patient info from the database"""
+    patient_id: int
+    patient_name: str
+    date_of_birth: date
+    NHS_number: str
+
+    class Config:
+        from_attributes = True
+
+# ----- Models for the Doctors
+class DoctorOut(BaseModel):
+    """A doctor info from the database"""
+    doctor_id: int
+    doctor_name: str
 
     class Config:
         from_attributes = True
