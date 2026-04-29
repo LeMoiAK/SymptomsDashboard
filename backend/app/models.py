@@ -53,4 +53,5 @@ class Treatment(BaseDeclarativeClass):
     patient_id = db.Column(db.Integer, nullable=False)
     cycle_number = db.Column(db.Integer, nullable=False)
     cycle_duration = db.Column(db.Integer, nullable=False)
+    day_in_cycle = db.Column(db.Integer, nullable=False)
     drug = db.Column(db.Text)
