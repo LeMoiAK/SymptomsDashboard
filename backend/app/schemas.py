@@ -59,3 +59,42 @@ class DoctorOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+# ----- Models for the Treatments
+class TreatmentCreate(BaseModel):
+    """A treatment before going into the database"""
+    treatment_date: date
+    patient_id: int
+    cycle_number: int
+    cycle_duration: int
+    day_in_cycle: int
+    drug: str
+class TreatmentOut(BaseModel):
+    """A treatment from the database"""
+    treatment_id: int
+    treatment_date: date
+    patient_id: int
+    cycle_number: int
+    cycle_duration: int
+    day_in_cycle: int
+    drug: str
+
+    class Config:
+        from_attributes = True
+
+# ----- Models for the Appointments
+class AppointmentCreate(BaseModel):
+    """An Appointment before going into the database"""
+    appt_date: date
+    patient_id: int
+    doctor_id: int
+    
+class AppointmentOut(BaseModel):
+    """An Appointment from the database"""
+    appt_id: int
+    appt_date: date
+    patient_id: int
+    doctor_id: int
+
+    class Config:
+        from_attributes = True

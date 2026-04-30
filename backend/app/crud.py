@@ -97,3 +97,61 @@ def get_doctor_info(dbSession: Session, doctor_id: int) -> schemas.DoctorOut:
 def get_all_doctors(dbSession: Session) -> List[schemas.DoctorOut]:
     """Returns the list of all the doctors"""
     return dbSession.query(models.DoctorOut).all()
+
+# ------------------- FUNCTIONS FOR THE TREATMENTS -------------------
+def create_treatment(dbSession: Session, treatment: schemas.TreatmentCreate) -> schemas.TreatmentOut:
+    """Inserts a new treatment into the database"""
+    db_treatment = models.Treatment(**treatment.model_dump())
+    dbSession.add(db_treatment)
+    dbSession.commit()
+    dbSession.refresh(db_treatment)
+    return db_treatment
+
+def get_treatment_info(dbSession: Session, treatment_id: int) -> schemas.TreatmentOut:
+    """Gets the info for a treatment"""
+    # Fetch existing record
+    return dbSession.query(models.Treatment).filter(models.Treatment.treatment_id == treatment_id).first()
+
+def get_treatments_between_dates_for_patient(dbSession: Session, patient_id: int, start_date: date, end_date: date) -> List[schemas.TreatmentOut]:
+    """Gets all the treatments between start and end dates (included) for a patient_id"""
+    return (
+        dbSession.query(models.Treatment)
+        .filter(models.Treatment.patient_id == patient_id)
+        .filter(models.Treatment.treatment_date >= start_date)
+        .filter(models.Treatment.treatment_date <= end_date)
+        .all()
+    )
+
+def get_last_treatment_for_patient(dbSession: Session, patient_id: int) -> schemas.TreatmentOut:
+    """Gets the last treatment for a patient_id"""
+    return (
+        dbSession.query(models.Treatment)
+        .filter(models.Treatment.patient_id == patient_id)
+        .order_by(models.Treatment.patient_id.desc())
+        .first()
+    )
+
+# ------------------- FUNCTIONS FOR THE APPOINTMENTS -------------------
+def create_appointment(dbSession: Session, appointment: schemas.AppointmentCreate) -> schemas.AppointmentOut:
+    """Inserts a new appointment into the database"""
+    db_appointment = models.Appointments(**appointment.model_dump())
+    dbSession.add(db_appointment)
+    dbSession.commit()
+    dbSession.refresh(db_appointment)
+    return db_appointment
+
+def get_appointments_for_patient(dbSession: Session, patient_id: int) -> List[schemas.AppointmentOut]:
+    """Gets all appointments for a patient"""
+    return (
+        dbSession.query(models.Appointments)
+        .filter(models.Appointments.patient_id == patient_id)
+        .all()
+    )
+
+def get_appointments_for_doctor(dbSession: Session, doctor_id: int) -> List[schemas.AppointmentOut]:
+    """Gets all appointments for a patient"""
+    return (
+        dbSession.query(models.Appointments)
+        .filter(models.Appointments.doctor_id == doctor_id)
+        .all()
+    )

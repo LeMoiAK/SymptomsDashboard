@@ -24,16 +24,16 @@ def update_log(log: schemas.DailyLogOut,  db: Session = Depends(get_db)):
     return crud.update_log(db, log)
 
 @router.get("/get_single_per_id", response_model=schemas.DailyLogOut)
-def get_log(log_id: int, db: Session = Depends(get_db)):
+def get_log_single(log_id: int, db: Session = Depends(get_db)):
     """Gets a single log by id"""
     return crud.get_single_log_per_id(db, log_id)
 
 @router.get("/get_single_per_patient_date", response_model=schemas.DailyLogOut)
-def get_log(patient_id: int, log_date: date,  db: Session = Depends(get_db)):
+def get_log_per_patient_date(patient_id: int, log_date: date,  db: Session = Depends(get_db)):
     """Gets a single log by patient_id and date"""
     return crud.get_single_log_per_patient_date(db, patient_id, log_date)
 
 @router.get("/get_between_dates_for_patient", response_model=List[schemas.DailyLogOut])
-def get_log(patient_id: int, start_date: date, end_date: date,  db: Session = Depends(get_db)):
-    """Gets a single log by patient_id and date"""
+def get_log_per_patient_between_dates(patient_id: int, start_date: date, end_date: date,  db: Session = Depends(get_db)):
+    """Gets all logs by patient_id between dates"""
     return crud.get_logs_between_dates_for_patient(db, patient_id, start_date, end_date)
