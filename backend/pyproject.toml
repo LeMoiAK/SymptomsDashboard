@@ -11,4 +11,5 @@ dependencies = [
     "python-dotenv",
     "psycopg[binary]>=3.3.3",
     "alembic>=1.18.4",
+    "pandas>=3.0.2",
 ]
