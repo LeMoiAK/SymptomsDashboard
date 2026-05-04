@@ -5,7 +5,7 @@ update, and get logs from the database
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from datetime import date, timedelta
+from datetime import date
 from typing import List
 
 from .. import crud, schemas
