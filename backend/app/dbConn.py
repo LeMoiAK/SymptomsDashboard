@@ -9,7 +9,9 @@ import os
 DATABASE_URL = os.getenv("DATABASE_URL")
 print(f"DB URL: {DATABASE_URL}")
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args={"connect_timeout": 5})
+with engine.connect() as conn:
+    print("Connected")
 
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
