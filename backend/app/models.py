@@ -40,7 +40,7 @@ class Appointments(BaseDeclarativeClass):
     __tablename__ = "appointments"
 
     appt_id = db.Column(db.Integer, primary_key=True, index=True)
-    appt_date = db.Column(db.DateTime, nullable=False)
+    appt_date = db.Column(db.Date, nullable=False)
     patient_id = db.Column(db.Integer, nullable=False)
     doctor_id = db.Column(db.Integer, nullable=False)
 
