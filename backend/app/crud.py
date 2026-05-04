@@ -96,7 +96,7 @@ def get_doctor_info(dbSession: Session, doctor_id: int) -> schemas.DoctorOut:
 
 def get_all_doctors(dbSession: Session) -> List[schemas.DoctorOut]:
     """Returns the list of all the doctors"""
-    return dbSession.query(models.DoctorOut).all()
+    return dbSession.query(models.Doctors).all()
 
 # ------------------- FUNCTIONS FOR THE TREATMENTS -------------------
 def create_treatment(dbSession: Session, treatment: schemas.TreatmentCreate) -> schemas.TreatmentOut:
