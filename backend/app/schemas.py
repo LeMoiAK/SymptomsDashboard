@@ -31,6 +31,12 @@ class DailyLogOut(BaseModel):
     class Config:
         from_attributes = True
 
+    def __repr__(self):
+        return f"Log on {self.log_date} - {self.log_text}"
+    
+    def __str__(self):
+        return f"Log on {self.log_date} - {self.log_text}"
+
 # ----- Models for the Patients
 class PatientCreate(BaseModel):
     """A patient info before going into the database"""
@@ -81,6 +87,12 @@ class TreatmentOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+    def __repr__(self):
+        return f"Treatment on {self.treatment_date} - C{self.cycle_number}D{self.day_in_cycle} - duration {self.cycle_duration}"
+    
+    def __str__(self):
+        return f"Treatment on {self.treatment_date} - C{self.cycle_number}D{self.day_in_cycle} - duration {self.cycle_duration}"
 
 # ----- Models for the Appointments
 class AppointmentCreate(BaseModel):

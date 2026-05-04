@@ -25,7 +25,7 @@ def get_logs_and_format(patient_id: int, start_date: date, end_date: date, db: S
     
     # Get the treatments, assume the earlist treatment to be 2 months before the start_date
     # treatments normally last up to 1 month cycle
-    treatment_start_date = start_date - timedelta(days=32)
+    treatment_start_date = start_date - timedelta(days=62)
     treatments = crud.get_treatments_between_dates_for_patient(db, patient_id, treatment_start_date, end_date)
     
     # Now for each day, we get if it is within a cycle
