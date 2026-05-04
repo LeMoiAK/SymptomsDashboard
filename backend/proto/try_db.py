@@ -208,14 +208,13 @@ if __name__ == "__main__":
     start_date=date(2026, 4, 15)
     end_date=date(2026, 5, 4)
     logs = crud.get_logs_between_dates_for_patient(db, patient_id=patient_id, start_date=start_date, end_date=end_date)
-    print(logs)
+    # print(logs)
 
     # Get the treatments, assume the earlist treatment to be 2 months before the start_date
     # treatments normally last up to 1 month cycle
     treatment_start_date = start_date - timedelta(days=62)
     treatments = crud.get_treatments_between_dates_for_patient(db, patient_id, treatment_start_date, end_date)
-    print(treatments)
-
+    # print(treatments)
 
     # For each log, we find if in a treatment period
     for log in logs:
@@ -254,5 +253,4 @@ if __name__ == "__main__":
     # Then generate the prompt and the call to the LLM
     summary = summarise_logs_pipeline([log.log_text for log in logs], batch_size=14)
     
-    print(logs)
-    print(logs[0])
+    print(summary)
